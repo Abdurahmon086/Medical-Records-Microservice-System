@@ -5,9 +5,9 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   app.useGlobalPipes(new ValidationPipe());
-  
+
   const config = new DocumentBuilder()
     .setTitle('Medical Records API')
     .setDescription('API Gateway for Medical Records Microservices')
@@ -17,6 +17,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(3300);
 }
 bootstrap();

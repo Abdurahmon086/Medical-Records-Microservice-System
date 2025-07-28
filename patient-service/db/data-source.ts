@@ -4,15 +4,14 @@ import { Patient } from 'src/modules/patient/patient.entity';
 import { Visit } from 'src/modules/visit/visit.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: 'localhost',
   port: 5432,
   username: 'postgres',
   password: '1230',
-  database: 'patient', 
-  entities: [Patient, Visit, Note, Admin],
+  database: 'patient',
+  entities: [Patient, Visit, Note],
   migrations: ['dist/db/migrations/*.js'],
 };
 

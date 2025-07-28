@@ -23,17 +23,11 @@ export class DoctorController {
   }
 
   @GrpcMethod('DoctorService', 'UpdateDoctor')
-  async update({
-    id,
-    name,
-    email,
-  }: {
-    id: number;
-    name?: string;
-    email?: string;
-  }) {
-    return await this.doctorService.update(id, { name, email });
+  async update(body: { id: number; data: { name: string; email: string } }) {
+    const { id, data } = body;
+    return await this.doctorService.update(id, data);
   }
+  
 
   @GrpcMethod('DoctorService', 'RemoveDoctor')
   async remove({ id }: { id: number }) {

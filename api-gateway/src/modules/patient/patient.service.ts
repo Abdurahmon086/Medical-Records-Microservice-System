@@ -1,12 +1,9 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ClientGrpc, Client } from '@nestjs/microservices';
+import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-
-interface PatientServiceGrpc {
-  CreatePatient(data: any): any;
-  GetPatient(data: any): any;
-  ListPatients(data: any): any;
-}
+import { PatientServiceGrpc } from 'src/types/patient';
+import { PatientDto } from './dto/patient.dto';
+import { error } from 'console';
 
 @Injectable()
 export class PatientService implements OnModuleInit {
@@ -15,18 +12,23 @@ export class PatientService implements OnModuleInit {
   constructor(@Inject('PATIENT_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
-    this.patientService = this.client.getService<PatientServiceGrpc>('PatientService');
+    this.patientService =
+      this.client.getService<PatientServiceGrpc>('PatientService');
   }
 
-  async createPatient(data: any) {
+  create(data: PatientDto) {
     return firstValueFrom(this.patientService.CreatePatient(data));
   }
 
-  async getPatient(id: number) {
+  getList() {
+    return firstValueFrom(this.patientService.ListPatients({}));
+  }
+
+  getOne(id: number) {
     return firstValueFrom(this.patientService.GetPatient({ id }));
   }
 
-  async listPatients() {
-    return firstValueFrom(this.patientService.ListPatients({}));
+  remove(id: number) {
+    return firstValueFrom(this.patientService.RemovePatient({ id }));
   }
 }

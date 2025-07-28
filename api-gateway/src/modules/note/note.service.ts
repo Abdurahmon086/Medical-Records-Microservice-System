@@ -1,32 +1,32 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ClientGrpc, Client } from '@nestjs/microservices';
+import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-
-interface NoteServiceGrpc {
-  CreateNote(data: any): any;
-  GetNote(data: any): any;
-  ListNotes(data: any): any;
-}
+import { NoteServiceGrpc } from 'src/types/note';
+import { NoteDto } from './dto/note.dto';
 
 @Injectable()
 export class NoteService implements OnModuleInit {
-  private NoteService: NoteServiceGrpc;
+  private noteService: NoteServiceGrpc;
 
   constructor(@Inject('NOTE_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
-    this.NoteService = this.client.getService<NoteServiceGrpc>('NoteService');
+    this.noteService = this.client.getService<NoteServiceGrpc>('NoteService');
   }
 
-  async createNote(data: any) {
-    return firstValueFrom(this.NoteService.CreateNote(data));
+  create(data: NoteDto) {
+    return firstValueFrom(this.noteService.CreateNote(data));
   }
 
-  async getNote(id: number) {
-    return firstValueFrom(this.NoteService.GetNote({ id }));
+  getList() {
+    return firstValueFrom(this.noteService.ListNotes({}));
   }
 
-  async listNotes() {
-    return firstValueFrom(this.NoteService.ListNotes({}));
+  getOne(id: number) {
+    return firstValueFrom(this.noteService.GetNote({ id }));
+  }
+
+  remove(id: number) {
+    return firstValueFrom(this.noteService.RemoveNote({ id }));
   }
 }

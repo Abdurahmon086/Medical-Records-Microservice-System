@@ -11,18 +11,17 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        package: ['patient', 'visit', 'note', 'admin'],
+        package: ['patient', 'visit', 'note'],
         protoPath: [
-          join(__dirname, '../proto/patient.proto'),
-          join(__dirname, '../proto/visit.proto'),
-          join(__dirname, '../proto/note.proto'),
-          join(__dirname, '../proto/admin.proto'),
+          join(process.cwd(), 'src/proto/patient.proto'),
+          join(process.cwd(), 'src/proto/visit.proto'),
+          join(process.cwd(), 'src/proto/note.proto'),
         ],
+        url: 'localhost:50052',
       },
     },
   );
   app.useGlobalPipes(new ValidationPipe());
-
   await app.listen();
 }
 bootstrap();

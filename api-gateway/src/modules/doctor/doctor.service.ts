@@ -4,7 +4,6 @@ import { firstValueFrom } from 'rxjs';
 import { DoctorDto } from './dto/doctor.dto';
 import { DoctorServiceGrpc } from 'src/types/doctor';
 
-
 @Injectable()
 export class DoctorService implements OnModuleInit {
   private doctorService: DoctorServiceGrpc;

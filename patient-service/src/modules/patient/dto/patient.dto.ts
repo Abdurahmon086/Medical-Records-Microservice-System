@@ -5,13 +5,13 @@ export class PatientDto {
   @IsNotEmpty()
   name: string;
 
-  @IsDateString()
+  @IsString()
   dob: string;
 
   @IsNumber()
   @IsNotEmpty()
   doctor_id: number;
-  
-  static doctor_id: number;
-  static dob: string | undefined;
+
+  // static doctor_id: number;
+  // static dob: string | undefined;
 }

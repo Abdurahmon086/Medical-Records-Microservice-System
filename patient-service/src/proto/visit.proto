@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package visit;
+
 service VisitService {
   rpc CreateVisit (CreateVisitReq) returns (VisitRes);
   rpc GetVisit (IdRes) returns (VisitRes);
@@ -39,7 +41,7 @@ message VisitListRes {
 message RemoveRes {
   int32 status = 1;
   string message = 2;
-  boolean data = 3;
+  bool data = 3;
 }
 
 message IdRes {

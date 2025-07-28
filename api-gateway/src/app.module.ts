@@ -16,6 +16,7 @@ import { AdminModule } from './modules/admin/admin.module';
         options: {
           package: 'doctor',
           protoPath: join(__dirname, '../proto/doctor.proto'),
+          url: 'localhost:50051',
         },
       },
       {
@@ -24,6 +25,7 @@ import { AdminModule } from './modules/admin/admin.module';
         options: {
           package: 'patient',
           protoPath: join(__dirname, '../proto/patient.proto'),
+          url: 'localhost:50052',
         },
       },
       {
@@ -32,6 +34,7 @@ import { AdminModule } from './modules/admin/admin.module';
         options: {
           package: 'visit',
           protoPath: join(__dirname, '../proto/visit.proto'),
+          url: 'localhost:50052',
         },
       },
       {
@@ -40,22 +43,23 @@ import { AdminModule } from './modules/admin/admin.module';
         options: {
           package: 'note',
           protoPath: join(__dirname, '../proto/note.proto'),
+          url: 'localhost:50052',
         },
       },
-      {
-        name: 'ADMIN_PACKAGE',
-        transport: Transport.GRPC,
-        options: {
-          package: 'admin',
-          protoPath: join(__dirname, '../proto/admin.proto'),
-        },
-      },
+      // {
+      //   name: 'ADMIN_PACKAGE',
+      //   transport: Transport.GRPC,
+      //   options: {
+      //     package: 'admin',
+      //     protoPath: join(__dirname, '../proto/admin.proto'),
+      //   },
+      // },
     ]),
     DoctorModule,
     PatientModule,
     VisitModule,
     NoteModule,
-    AdminModule
+    // AdminModule,
   ],
 })
 export class AppModule {}

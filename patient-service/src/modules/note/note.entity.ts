@@ -1,4 +1,3 @@
-// src/patient/entities/note.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -14,7 +13,7 @@ export class Note {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: '' })
   text: string;
 
   @Column()

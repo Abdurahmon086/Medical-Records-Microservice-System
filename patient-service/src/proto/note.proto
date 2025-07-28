@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package note;
+
 service NoteService {
   rpc CreateNote (CreateNoteReq) returns (NoteRes);
   rpc GetNote (IdRes) returns (NoteRes);
@@ -39,7 +41,7 @@ message NoteListRes {
 message RemoveRes {
   int32 status = 1;
   string message = 2;
-  boolean data = 3;
+  bool data = 3;
 }
 
 message IdRes {

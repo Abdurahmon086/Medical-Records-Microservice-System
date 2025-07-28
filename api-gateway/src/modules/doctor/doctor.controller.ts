@@ -63,7 +63,7 @@ export class DoctorController {
   })
   @ApiResponse({ status: 404, description: 'Doctor not found' })
   @ApiResponse({ status: 500, description: 'Server error' })
-  updateDoctor(@Param('id') id: number, @Body() data: DoctorDto) {
+  update(@Param('id') id: number, @Body() data: DoctorDto) {
     return this.doctorService.update(+id, data);
   }
 

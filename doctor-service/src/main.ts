@@ -5,12 +5,13 @@ import { join } from 'path';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  console.log(__dirname);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
       transport: Transport.GRPC,
       options: {
-        protoPath: join(__dirname, '../proto/doctor.proto'),
+        protoPath: join(process.cwd(), 'src/proto/doctor.proto'),
         package: 'doctor',
         url: 'localhost:50051',
       },

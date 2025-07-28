@@ -14,13 +14,19 @@ import { ClientGrpc } from '@nestjs/microservices';
 import { IResponseInfo } from 'src/types';
 
 interface DoctorService {
-  GetDoctorById(data: { id: number }): Observable<DoctorResponse>;
+  GetDoctor(data: { id: number }): Observable<DoctorResponse>;
 }
 
 interface DoctorResponse {
-  id: number;
-  name: string;
-  email: string;
+  status: number;
+  message: string;
+  data?: {
+    id: number;
+    name: string;
+    email: string;
+    update_date: string;
+    create_date: string;
+  };
 }
 
 @Injectable()
@@ -39,22 +45,27 @@ export class PatientService implements OnModuleInit {
 
   async create(dto: PatientDto): Promise<IResponseInfo<Patient>> {
     try {
+      console.log(dto);
       const doctor = await lastValueFrom(
-        this.doctorService.GetDoctorById({ id: dto.doctor_id }),
+        this.doctorService.GetDoctor({ id: dto.doctor_id }),
       );
 
-      if (!doctor) {
+      if (!doctor.data) {
         throw new NotFoundException('Doctor not found');
       }
 
-      const patient = this.patientRepository.create({
-        name: dto.name,
-        dob: dto.dob,
-        doctor_id: dto.doctor_id,
-      });
+      const patient = await this.patientRepository.save(
+        this.patientRepository.create({
+          name: dto.name,
+          dob: dto.dob,
+          doctor_id: dto.doctor_id,
+        }),
+      );
 
       return { status: 201, data: patient, message: 'Patient Created' };
     } catch (error) {
+      console.error(error); // Qo'shing
+
       return {
         status: 500,
         data: null,
@@ -96,6 +107,7 @@ export class PatientService implements OnModuleInit {
 
   async remove(id: number): Promise<IResponseInfo<boolean>> {
     try {
+      console.log(id);
       const patient = await this.patientRepository.findOneBy({ id });
 
       if (!patient) {

@@ -17,8 +17,8 @@ export class Visit {
 
   @Column()
   patient_id: number;
-  
-  @Column()
+
+  @Column({ type: 'timestamp' })
   visit_date: Date;
 
   @CreateDateColumn({ type: 'timestamp' })

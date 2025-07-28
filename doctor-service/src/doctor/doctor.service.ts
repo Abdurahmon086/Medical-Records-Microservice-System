@@ -89,7 +89,7 @@ export class DoctorService {
         where: { email: dta.email },
       });
 
-      if (haveDoctor) {
+      if (haveDoctor && haveDoctor.id !== id) {
         throw new BadRequestException(
           'The doctor at this email already exists.',
         );

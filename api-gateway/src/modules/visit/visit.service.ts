@@ -1,32 +1,33 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc, Client } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-
-interface VisitServiceGrpc {
-  CreateVisit(data: any): any;
-  GetVisit(data: any): any;
-  ListVisits(data: any): any;
-}
+import { VisitServiceGrpc } from 'src/types/visit';
+import { VisitDto } from './dto/visit.dto';
 
 @Injectable()
 export class VisitService implements OnModuleInit {
-  private VisitService: VisitServiceGrpc;
+  private visitService: VisitServiceGrpc;
 
   constructor(@Inject('VISIT_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
-    this.VisitService = this.client.getService<VisitServiceGrpc>('VisitService');
+    this.visitService =
+      this.client.getService<VisitServiceGrpc>('VisitService');
   }
 
-  async createVisit(data: any) {
-    return firstValueFrom(this.VisitService.CreateVisit(data));
+  create(data: VisitDto) {
+    return firstValueFrom(this.visitService.CreateVisit(data));
   }
 
-  async getVisit(id: number) {
-    return firstValueFrom(this.VisitService.GetVisit({ id }));
+  getList() {
+    return firstValueFrom(this.visitService.ListVisits({}));
   }
 
-  async listVisits() {
-    return firstValueFrom(this.VisitService.ListVisits({}));
+  getOne(id: number) {
+    return firstValueFrom(this.visitService.GetVisit({ id }));
+  }
+
+  remove(id: number) {
+    return firstValueFrom(this.visitService.RemoveVisit({ id }));
   }
 }

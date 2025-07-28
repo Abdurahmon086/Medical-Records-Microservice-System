@@ -16,7 +16,7 @@ export class Patient {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ default: '' })
   dob: string;
 
   @Column()
