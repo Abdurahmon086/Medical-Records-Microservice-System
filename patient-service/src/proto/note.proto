@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+service NoteService {
+  rpc CreateNote (CreateNoteReq) returns (NoteRes);
+  rpc GetNote (IdRes) returns (NoteRes);
+  rpc ListNotes (Empty) returns (NoteListRes);
+  rpc RemoveNote (IdRes) returns (RemoveRes);
+}
+
+message CreateNoteReq {
+  string text = 1;
+  string visit_id = 2;
+}
+
+message Note {
+  string id = 1;
+  string text = 2;
+  string visit_id = 3;
+  string created_at = 4;
+  string updated_at = 5;
+}
+
+message NoteList {
+  repeated Note Notes = 1;
+}
+
+message NoteRes {
+  int32 status = 1;
+  string message = 2;
+  Note data = 3;
+}
+
+message NoteListRes {
+  int32 status = 1;
+  string message = 2;
+  NoteList data = 3;
+}
+
+message RemoveRes {
+  int32 status = 1;
+  string message = 2;
+  boolean data = 3;
+}
+
+message IdRes {
+  int32 id = 1;
+}
+
+message Empty {}

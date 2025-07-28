@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+service VisitService {
+  rpc CreateVisit (CreateVisitReq) returns (VisitRes);
+  rpc GetVisit (IdRes) returns (VisitRes);
+  rpc ListVisits (Empty) returns (VisitListRes);
+  rpc RemoveVisit (IdRes) returns (RemoveRes);
+}
+
+message CreateVisitReq {
+  string patient_id = 1;
+  string visit_date = 2;
+}
+
+message Visit {
+  string id = 1;
+  string patient_id = 2;
+  string visit_date = 3;
+  string created_at = 4;
+  string updated_at = 5;
+}
+
+message VisitList {
+  repeated Visit visits = 1;
+}
+
+message VisitRes {
+  int32 status = 1;
+  string message = 2;
+  Visit data = 3;
+}
+
+message VisitListRes {
+  int32 status = 1;
+  string message = 2;
+  VisitList data = 3;
+}
+
+message RemoveRes {
+  int32 status = 1;
+  string message = 2;
+  boolean data = 3;
+}
+
+message IdRes {
+  int32 id = 1;
+}
+
+message Empty {}
