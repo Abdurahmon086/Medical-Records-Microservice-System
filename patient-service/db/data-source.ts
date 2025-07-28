@@ -1,4 +1,3 @@
-import { Admin } from 'src/modules/admin/admin.entity';
 import { Note } from 'src/modules/note/note.entity';
 import { Patient } from 'src/modules/patient/patient.entity';
 import { Visit } from 'src/modules/visit/visit.entity';
@@ -6,11 +5,11 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: '1230',
-  database: 'patient',
+  host: process.env.DB_HOST || 'localhost',
+  port: parseInt(process.env.DB_PORT || '5432'),
+  username: process.env.DB_USERNAME || 'postgres',
+  password: String(process.env.DB_PASSWORD || '1230'),
+  database: process.env.DB_NAME || 'patient',
   entities: [Patient, Visit, Note],
   migrations: ['dist/db/migrations/*.js'],
 };

@@ -12,7 +12,7 @@ import { join } from 'path';
         transport: Transport.GRPC,
         options: {
           package: 'patient',
-          protoPath: join(__dirname, '../../../proto/patient.proto'),
+          protoPath: join(process.cwd(), 'src/proto/patient.proto'),
           url: 'localhost:50052',
         },
       },
@@ -20,5 +20,6 @@ import { join } from 'path';
   ],
   controllers: [PatientController],
   providers: [PatientService],
+  exports: [PatientService],
 })
 export class PatientModule {}

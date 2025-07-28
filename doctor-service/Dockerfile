@@ -9,6 +9,4 @@ COPY . .
 
 RUN npm run build
 
-RUN npm run migration:run
-
-CMD ["node", "dist/main"]
+CMD ["npm", "run", "start:dev"]

@@ -5,7 +5,6 @@ import { join } from 'path';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  console.log(__dirname);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
@@ -19,7 +18,6 @@ async function bootstrap() {
   );
 
   app.useGlobalPipes(new ValidationPipe());
-
   await app.listen();
 }
 bootstrap();

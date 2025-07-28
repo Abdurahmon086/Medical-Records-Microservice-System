@@ -9,22 +9,21 @@ export class PatientController {
 
   @GrpcMethod('PatientService', 'CreatePatient')
   async create(dto: PatientDto) {
-    console.log(dto);
     return await this.patientService.create(dto);
   }
 
   @GrpcMethod('PatientService', 'ListPatients')
-  getList() {
-    return this.patientService.getList();
+  async cgetList() {
+    return await this.patientService.getList();
   }
 
   @GrpcMethod('PatientService', 'GetPatient')
-  getOne({ id }: { id: number }) {
-    return this.patientService.getOne(+id);
+  async getOne({ id }: { id: number }) {
+    return await this.patientService.getOne(+id);
   }
 
   @GrpcMethod('PatientService', 'RemovePatient')
-  remove({ id }: { id: number }) {
-    return this.patientService.remove(+id);
+  async remove({ id }: { id: number }) {
+    return await this.patientService.remove(+id);
   }
 }

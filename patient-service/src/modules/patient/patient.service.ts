@@ -45,7 +45,6 @@ export class PatientService implements OnModuleInit {
 
   async create(dto: PatientDto): Promise<IResponseInfo<Patient>> {
     try {
-      console.log(dto);
       const doctor = await lastValueFrom(
         this.doctorService.GetDoctor({ id: dto.doctor_id }),
       );
@@ -55,17 +54,11 @@ export class PatientService implements OnModuleInit {
       }
 
       const patient = await this.patientRepository.save(
-        this.patientRepository.create({
-          name: dto.name,
-          dob: dto.dob,
-          doctor_id: dto.doctor_id,
-        }),
+        this.patientRepository.create(dto),
       );
 
       return { status: 201, data: patient, message: 'Patient Created' };
     } catch (error) {
-      console.error(error); // Qo'shing
-
       return {
         status: 500,
         data: null,

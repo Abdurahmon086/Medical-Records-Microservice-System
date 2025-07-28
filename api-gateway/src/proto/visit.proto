@@ -10,13 +10,13 @@ service VisitService {
 }
 
 message CreateVisitReq {
-  string patient_id = 1;
+  int32 patient_id = 1;
   string visit_date = 2;
 }
 
 message Visit {
-  string id = 1;
-  string patient_id = 2;
+  int32 id = 1;
+  int32 patient_id = 2;
   string visit_date = 3;
   string created_at = 4;
   string updated_at = 5;

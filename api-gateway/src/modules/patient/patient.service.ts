@@ -3,13 +3,12 @@ import { ClientGrpc } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { PatientServiceGrpc } from 'src/types/patient';
 import { PatientDto } from './dto/patient.dto';
-import { error } from 'console';
 
 @Injectable()
 export class PatientService implements OnModuleInit {
   private patientService: PatientServiceGrpc;
 
-  constructor(@Inject('PATIENT_PACKAGE') private client: ClientGrpc) {}
+  constructor(@Inject('PATIENT_PACKAGE') private  client: ClientGrpc) {}
 
   onModuleInit() {
     this.patientService =

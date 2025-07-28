@@ -22,21 +22,21 @@ export class PatientDto {
 }
 
 export class GetPatientDto {
-  @ApiProperty({ example: 1 })
+  @ApiProperty()
   id: number;
 
-  @ApiProperty({ example: 'Ali Vali' })
+  @ApiProperty()
   name: string;
 
-  @ApiProperty({ example: '1990-01-01' })
+  @ApiProperty()
   dob: string;
 
-  @ApiProperty({ example: 1 })
+  @ApiProperty()
   doctor_id: number;
 
-  @ApiProperty({ example: '2024-07-28T12:34:56.789Z' })
+  @ApiProperty()
   create_date: Date;
 
-  @ApiProperty({ example: '2024-07-28T12:34:56.789Z' })
+  @ApiProperty()
   update_date: Date;
 }

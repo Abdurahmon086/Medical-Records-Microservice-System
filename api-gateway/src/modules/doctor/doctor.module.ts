@@ -8,11 +8,11 @@ import { join } from 'path';
   imports: [
     ClientsModule.register([
       {
-        name: "DOCTOR_PACKAGE",
+        name: 'DOCTOR_PACKAGE',
         transport: Transport.GRPC,
         options: {
           package: 'doctor',
-          protoPath: join(__dirname, '../../../proto/doctor.proto'),
+          protoPath: join(process.cwd(), 'src/proto/doctor.proto'),
           url: '0.0.0.0:50051',
         },
       },
@@ -20,5 +20,6 @@ import { join } from 'path';
   ],
   controllers: [DoctorController],
   providers: [DoctorService],
+  exports: [DoctorService],
 })
 export class DoctorModule {}

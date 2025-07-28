@@ -8,11 +8,11 @@ import { join } from 'path';
   imports: [
     ClientsModule.register([
       {
-        name: "NOTE_PACKAGE",
+        name: 'NOTE_PACKAGE',
         transport: Transport.GRPC,
         options: {
           package: 'note',
-          protoPath: join(__dirname, '../../../proto/note.proto'),
+          protoPath: join(process.cwd(), 'src/proto/note.proto'),
           url: 'localhost:50052',
         },
       },

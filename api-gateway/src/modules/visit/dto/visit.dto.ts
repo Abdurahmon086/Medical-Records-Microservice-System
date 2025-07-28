@@ -1,12 +1,12 @@
-import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class VisitDto {
   @ApiProperty({
-    example: '2025-07-28T10:30:00.000Z',
+    example: '2025-07-28',
     description: 'The date and time of the visit',
   })
-  @IsDateString()
+  @IsString()
   @IsNotEmpty()
   visit_date: string;
 

@@ -1,5 +1,5 @@
+import { Admines } from 'src/modules/admin/admin.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { Doctor } from '../src/doctor/doctor.entity';
 
 export const dataSourceOptins: DataSourceOptions = {
   type: 'postgres',
@@ -7,8 +7,8 @@ export const dataSourceOptins: DataSourceOptions = {
   port: parseInt(process.env.DB_PORT || '5432'),
   username: process.env.DB_USERNAME || 'postgres',
   password: String(process.env.DB_PASSWORD || '1230'),
-  database: process.env.DB_NAME || 'doctor',
-  entities: [Doctor],
+  database: process.env.DB_NAME || 'admin-db',
+  entities: [Admines],
   migrations: ['dist/db/migrations/*.js'],
 };
 

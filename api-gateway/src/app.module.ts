@@ -6,16 +6,19 @@ import { PatientModule } from './modules/patient/patient.module';
 import { VisitModule } from './modules/visit/visit.module';
 import { NoteModule } from './modules/note/note.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { dataSourceOptins } from 'db/data-source';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot(dataSourceOptins),
     ClientsModule.register([
       {
         name: 'DOCTOR_PACKAGE',
         transport: Transport.GRPC,
         options: {
           package: 'doctor',
-          protoPath: join(__dirname, '../proto/doctor.proto'),
+          protoPath: join(process.cwd(), 'src/proto/doctor.proto'),
           url: 'localhost:50051',
         },
       },
@@ -24,7 +27,7 @@ import { AdminModule } from './modules/admin/admin.module';
         transport: Transport.GRPC,
         options: {
           package: 'patient',
-          protoPath: join(__dirname, '../proto/patient.proto'),
+          protoPath: join(process.cwd(), 'src/proto/patient.proto'),
           url: 'localhost:50052',
         },
       },
@@ -33,7 +36,7 @@ import { AdminModule } from './modules/admin/admin.module';
         transport: Transport.GRPC,
         options: {
           package: 'visit',
-          protoPath: join(__dirname, '../proto/visit.proto'),
+          protoPath: join(process.cwd(), 'src/proto/visit.proto'),
           url: 'localhost:50052',
         },
       },
@@ -42,24 +45,16 @@ import { AdminModule } from './modules/admin/admin.module';
         transport: Transport.GRPC,
         options: {
           package: 'note',
-          protoPath: join(__dirname, '../proto/note.proto'),
+          protoPath: join(process.cwd(), 'src/proto/note.proto'),
           url: 'localhost:50052',
         },
       },
-      // {
-      //   name: 'ADMIN_PACKAGE',
-      //   transport: Transport.GRPC,
-      //   options: {
-      //     package: 'admin',
-      //     protoPath: join(__dirname, '../proto/admin.proto'),
-      //   },
-      // },
     ]),
     DoctorModule,
     PatientModule,
     VisitModule,
     NoteModule,
-    // AdminModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

@@ -15,7 +15,6 @@ export class PatientController {
     description: 'Patient created',
     type: GetPatientDto,
   })
-  @ApiResponse({ status: 400, description: 'Validation failed' })
   @ApiResponse({ status: 500, description: 'Server error' })
   create(@Body() data: PatientDto) {
     return this.patientService.create(data);

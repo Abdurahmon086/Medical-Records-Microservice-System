@@ -1,7 +1,7 @@
-import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class VisitDto {
-  @IsDateString()
+  @IsString()
   @IsNotEmpty()
   visit_date: string;
 
